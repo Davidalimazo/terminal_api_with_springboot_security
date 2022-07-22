@@ -1,7 +1,6 @@
 package com.terminalapi.terminalapi.security;
 
-import com.terminalapi.terminalapi.entity.Agent;
-import com.terminalapi.terminalapi.repository.AgentRepository;
+import com.terminalapi.terminalapi.repository.TerminalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -17,15 +16,17 @@ import java.util.Arrays;
 @Component
 public class MyAuthProvider implements AuthenticationProvider {
     @Autowired
+    PasswordEncoder passwordEncoder;
+    @Autowired
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     @Autowired
-    AgentRepository agentRepository;
+    TerminalRepository terminalRepository;
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String userName = authentication.getName();
         String password = authentication.getCredentials().toString();
-        Agent agent = agentRepository.findByTerminalId(userName);
-        if (agent.getTerminalId().equals(userName) && encoder.matches(password, agent.getPassword())) {
+
+        if ("user".equals(userName) && encoder.matches(password, passwordEncoder.encode("pass"))) {
             return new UsernamePasswordAuthenticationToken(userName, password, Arrays.asList());
         } else
             throw new BadCredentialsException("Invalid Credentials");
