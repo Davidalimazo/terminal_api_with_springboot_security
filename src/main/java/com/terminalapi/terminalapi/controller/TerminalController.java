@@ -24,8 +24,6 @@ public class TerminalController {
     public ResponseEntity<?> terminalResponse(@RequestBody TerminalModel terminalModel){
         if(terminalService.addNewTerminal(terminalModel) != null){
             BaseResponse baseResponse = new BaseResponse();
-            long dateTrans = terminalModel.getTransDate().atStartOfDay(ZoneId.systemDefault()).toEpochSecond() * 1000;
-            long datePos = terminalModel.getPosDate().atStartOfDay(ZoneId.systemDefault()).toEpochSecond() * 1000;
 
             baseResponse.setTerminalId(terminalModel.getTerminalId());
             baseResponse.setAmount(terminalModel.getAmount());
@@ -34,8 +32,8 @@ public class TerminalController {
             baseResponse.setRrn(terminalModel.getRrn());
             baseResponse.setStan(terminalModel.getStan());
             baseResponse.setSerialNumber(terminalModel.getSerialNumber());
-            baseResponse.setPosDate(datePos);
-            baseResponse.setTransDate(dateTrans);
+            baseResponse.setPosDate(terminalModel.getPosDate());
+            baseResponse.setTransDate(terminalModel.getTransDate());
 
             return ResponseEntity.ok(baseResponse);
         }
