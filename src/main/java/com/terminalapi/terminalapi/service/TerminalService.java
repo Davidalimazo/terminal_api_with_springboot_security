@@ -6,6 +6,8 @@ import com.terminalapi.terminalapi.repository.TerminalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TerminalService {
     private final TerminalRepository terminalRepository;
@@ -15,9 +17,15 @@ public class TerminalService {
         this.terminalRepository = terminalRepository;
     }
 
-    public Terminal getTerminal(TerminalModel terminalModel) {
-        return (Terminal) terminalRepository.findAll();
+    public List<Terminal> getTerminalList() {
+        return terminalRepository.findAll();
+    }
 
+    public List<Terminal> getTerminalByResponseCode(String code) {
+        return terminalRepository.findByResponseCode(code);
+    }
+    public List<Terminal> getBySearch(String search){
+        return terminalRepository.findBySearch(search);
     }
 
     public Terminal addNewTerminal(TerminalModel terminalModel) {
@@ -27,7 +35,7 @@ public class TerminalService {
             terminal.setTerminalId(terminalModel.getTerminalId());
             terminal.setAmount(terminalModel.getAmount());
             terminal.setPosDate(terminalModel.getPosDate());
-            terminal.setResponse_code(terminalModel.getResponse_code());
+            terminal.setResponseCode(terminalModel.getResponseCode());
             terminal.setResponseMessage(terminalModel.getResponseMessage());
             terminal.setRrn(terminalModel.getRrn());
             terminal.setTransDate(terminalModel.getTransDate());

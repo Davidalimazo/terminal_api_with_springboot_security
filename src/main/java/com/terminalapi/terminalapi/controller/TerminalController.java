@@ -1,19 +1,19 @@
 package com.terminalapi.terminalapi.controller;
 
+import com.terminalapi.terminalapi.entity.Terminal;
 import com.terminalapi.terminalapi.model.TerminalModel;
 import com.terminalapi.terminalapi.response.BaseResponse;
 import com.terminalapi.terminalapi.service.TerminalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.ZoneId;
-
+import java.util.List;
+//@CrossOrigin(origins = "*")
 @RestController
 public class TerminalController {
+
     private final TerminalService terminalService;
     @Autowired
     public TerminalController(TerminalService terminalService) {
@@ -27,7 +27,7 @@ public class TerminalController {
 
             baseResponse.setTerminalId(terminalModel.getTerminalId());
             baseResponse.setAmount(terminalModel.getAmount());
-            baseResponse.setResponse_code(terminalModel.getResponse_code());
+            baseResponse.setResponse_code(terminalModel.getResponseCode());
             baseResponse.setResponseMessage(terminalModel.getResponseMessage());
             baseResponse.setRrn(terminalModel.getRrn());
             baseResponse.setStan(terminalModel.getStan());
@@ -38,5 +38,22 @@ public class TerminalController {
             return ResponseEntity.ok(baseResponse);
         }
         return ResponseEntity.status(500).body("Terminal already exist");
+    }
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody String user, String password){
+
+        return ResponseEntity.status(200).body("login successful");
+    }
+    @GetMapping("/list")
+    public List<Terminal> getTerminalList(){
+        return terminalService.getTerminalList();
+    }
+    @GetMapping("/response/{code}")
+    public List<Terminal> getTerminalResponse(@PathVariable("code") String code){
+        return terminalService.getTerminalByResponseCode(code);
+    }
+    @GetMapping("/search/{value}")
+    public List<Terminal> getSearches(@PathVariable("value") String value){
+        return terminalService.getBySearch(value);
     }
 }

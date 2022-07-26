@@ -19,6 +19,6 @@ public class TerminalModel {
     private Long posDate;
     private Long transDate;
     private BigDecimal amount;
-    private String response_code;
+    private String responseCode;
     private String responseMessage;
 }
