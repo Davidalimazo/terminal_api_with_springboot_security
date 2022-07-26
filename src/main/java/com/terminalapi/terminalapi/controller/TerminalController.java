@@ -12,7 +12,7 @@ import java.time.ZoneId;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/terminal-request")
+@RequestMapping("/api/terminal-request")
 public class TerminalController {
     @Autowired
     TerminalService terminalService;

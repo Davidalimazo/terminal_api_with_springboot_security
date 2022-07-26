@@ -16,8 +16,8 @@ public class TerminalModel {
     private String stan;
     private String rrn;
     private String serialNumber;
-    private LocalDate posDate;
-    private LocalDate transDate;
+    private Long posDate;
+    private Long transDate;
     private BigDecimal amount;
     private String response_code;
     private String responseMessage;
