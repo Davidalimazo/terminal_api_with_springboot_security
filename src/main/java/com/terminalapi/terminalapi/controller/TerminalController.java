@@ -18,10 +18,20 @@ public class TerminalController {
     TerminalService terminalService;
 
     @PostMapping
-    public Terminal postRequest(@RequestBody TerminalModel terminalModel){
-        return terminalService.addNewTerminal(terminalModel);
-    }
+    public ResponseEntity<?> postRequest(@RequestBody TerminalModel terminalModel){
+        if(terminalService.addNewTerminal(terminalModel) != null){
+            BaseResponse baseResponse = new BaseResponse();
 
+            baseResponse.setResponse_code("00");
+            baseResponse.setResponseMessage("successful");
+
+            return ResponseEntity.ok(baseResponse);
+        }
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setResponse_code("01");
+        baseResponse.setResponseMessage("error saving data to database");
+        return ResponseEntity.status(500).body(baseResponse);
+    }
     @GetMapping
     public List<Terminal> getRequest(){
         return terminalService.getTerminal();
