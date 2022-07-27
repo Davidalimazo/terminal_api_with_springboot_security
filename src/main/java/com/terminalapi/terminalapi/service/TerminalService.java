@@ -30,14 +30,32 @@ public class TerminalService {
             terminal.setAmount(terminalModel.getAmount());
             terminal.setPosDate(terminalModel.getPosDate());
             terminal.setResponse_code("00");
-            terminal.setResponseMessage("successful");
+            terminal.setResponseMessage("TRANSACTION APPROVED");
             terminal.setRrn(terminalModel.getRrn());
             terminal.setTransDate(terminalModel.getTransDate());
             terminal.setStan(terminalModel.getStan());
             terminal.setSerialNumber(terminalModel.getSerialNumber());
+            terminal.setMaskPan(terminalModel.getMaskPan());
+            terminal.setPmNumber(terminalModel.getPmNumber());
+            terminal.setNoticeReceiver(terminalModel.getNoticeReceiver());
+            terminal.setTransType(terminalModel.getTransType());
             terminalRepository.save(terminal);
             return terminal;
         } else {
+            terminal.setTerminalId(terminalModel.getTerminalId());
+            terminal.setAmount(terminalModel.getAmount());
+            terminal.setPosDate(terminalModel.getPosDate());
+            terminal.setResponse_code("01");
+            terminal.setResponseMessage("TRANSACTION FAILED");
+            terminal.setRrn(terminalModel.getRrn());
+            terminal.setTransDate(terminalModel.getTransDate());
+            terminal.setStan(terminalModel.getStan());
+            terminal.setSerialNumber(terminalModel.getSerialNumber());
+            terminal.setMaskPan(terminalModel.getMaskPan());
+            terminal.setPmNumber(terminalModel.getPmNumber());
+            terminal.setNoticeReceiver(terminalModel.getNoticeReceiver());
+            terminal.setTransType(terminalModel.getTransType());
+            terminalRepository.save(terminal);
             return null;
         }
     }

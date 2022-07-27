@@ -23,13 +23,13 @@ public class TerminalController {
             BaseResponse baseResponse = new BaseResponse();
 
             baseResponse.setResponse_code("00");
-            baseResponse.setResponseMessage("successful");
+            baseResponse.setResponseMessage("TRANSACTION APPROVED");
 
             return ResponseEntity.ok(baseResponse);
         }
         BaseResponse baseResponse = new BaseResponse();
         baseResponse.setResponse_code("01");
-        baseResponse.setResponseMessage("error saving data to database");
+        baseResponse.setResponseMessage("TRANSACTION FAILED");
         return ResponseEntity.status(500).body(baseResponse);
     }
     @GetMapping
