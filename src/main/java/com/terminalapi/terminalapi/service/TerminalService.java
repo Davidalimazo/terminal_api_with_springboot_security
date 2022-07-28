@@ -23,7 +23,7 @@ public class TerminalService {
     }
 
     public Terminal addNewTerminal(TerminalModel terminalModel) {
-        Terminal terminalOptional = terminalRepository.findByTerminalId(terminalModel.getSerialNumber());
+        Terminal terminalOptional = terminalRepository.findBySerialNumber(terminalModel.getSerialNumber());
         Terminal terminal = new Terminal();
         if (terminalOptional == null) {
             terminal.setTerminalId(terminalModel.getTerminalId());

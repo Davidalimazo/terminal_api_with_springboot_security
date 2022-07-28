@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TerminalRepository extends JpaRepository<Terminal, Long> {
     public Terminal findByTerminalId(String terminalId);
+    public Terminal findBySerialNumber(String serialNumber);
 }

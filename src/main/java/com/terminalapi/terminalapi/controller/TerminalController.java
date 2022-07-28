@@ -19,17 +19,21 @@ public class TerminalController {
 
     @PostMapping
     public ResponseEntity<?> postRequest(@RequestBody TerminalModel terminalModel){
-        if(terminalService.addNewTerminal(terminalModel) != null){
-            BaseResponse baseResponse = new BaseResponse();
-
-            baseResponse.setResponse_code("00");
-            baseResponse.setResponseMessage("TRANSACTION APPROVED");
-
-            return ResponseEntity.ok(baseResponse);
-        }
         BaseResponse baseResponse = new BaseResponse();
+
+        if(terminalService.addNewTerminal(terminalModel) != null){
+            if (terminalModel.getResponse_code().equals("00")) {
+                baseResponse.setResponse_code("00");
+                baseResponse.setResponseMessage("APPROVED TRANSACTION SAVED SUCCESSFULLY");
+                return ResponseEntity.ok(baseResponse);
+            }
+
+            baseResponse.setResponse_code("01");
+            baseResponse.setResponseMessage("FAILED TRANSACTION SAVED SUCCESSFULLY");
+            return ResponseEntity.status(500).body(baseResponse);
+        }
         baseResponse.setResponse_code("01");
-        baseResponse.setResponseMessage("TRANSACTION FAILED");
+        baseResponse.setResponseMessage("ERROR OCCURRED WHILE SAVING TRANSACTION AS A COPY OF THE TRANSACTION ALREADY EXIST");
         return ResponseEntity.status(500).body(baseResponse);
     }
     @GetMapping
