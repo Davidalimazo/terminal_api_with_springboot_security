@@ -28,7 +28,7 @@ public class TerminalController {
                 return ResponseEntity.ok(baseResponse);
             }
 
-            baseResponse.setResponse_code("01");
+            baseResponse.setResponse_code("00");
             baseResponse.setResponseMessage("FAILED TRANSACTION SAVED SUCCESSFULLY");
             return ResponseEntity.status(500).body(baseResponse);
         }
