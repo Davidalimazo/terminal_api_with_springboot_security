@@ -29,8 +29,8 @@ public class TerminalService {
             terminal.setTerminalId(terminalModel.getTerminalId());
             terminal.setAmount(terminalModel.getAmount());
             terminal.setPosDate(terminalModel.getPosDate());
-            terminal.setResponse_code("00");
-            terminal.setResponseMessage("TRANSACTION APPROVED");
+            terminal.setResponse_code(terminalModel.getResponse_code());
+            terminal.setResponseMessage(terminalModel.getResponseMessage());
             terminal.setRrn(terminalModel.getRrn());
             terminal.setTransDate(terminalModel.getTransDate());
             terminal.setStan(terminalModel.getStan());
